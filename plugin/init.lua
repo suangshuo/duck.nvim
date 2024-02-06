@@ -1,1 +1,1 @@
-
+print("Duck is running!")
