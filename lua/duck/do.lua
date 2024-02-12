@@ -1,5 +1,5 @@
 local todo=function()
-    print("Duck is running")
+    vim.notify("Duck is running!")
 end
 return {
     todo = todo
