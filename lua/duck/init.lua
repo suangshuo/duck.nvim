@@ -6,6 +6,9 @@ local config_if=function()
     if(conf.tools.cta)then
         core.ch_to_ascii()
     end
+    if(conf.tools.compute)then
+        core.compute()
+    end
 end
 local  setup=function(new_config)
     conf = vim.tbl_deep_extend("force", conf, new_config or {})

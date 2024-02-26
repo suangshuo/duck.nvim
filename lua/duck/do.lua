@@ -12,7 +12,19 @@ local ch_to_ascii=function()
         { nargs = 1 }
     )
 end
+local compute=function()
+    api.nvim_create_user_command(
+        'Compute',
+        function(opts)
+            local handle=io.popen([[echo "]]..opts.args..[["|bc]])
+            local ret=handle:read("*a")
+            handle:close()
+            notify(ret)
+        end
+    )
+end
 return {
     todo = todo,
     ch_to_ascii =ch_to_ascii,
+    compute = compute,
 }
