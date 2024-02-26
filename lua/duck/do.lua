@@ -1,11 +1,18 @@
 local api=vim.api
+local notify=vim.notify
 local todo=function()
-    vim.notify("Duck is running!")
+    notify("Duck is running!")
 end
-local CreatDuck=function ()
-    
+local ch_to_ascii=function()
+    api.nvim_create_user_command(
+        'A',
+        function(opts)
+            notify(tostring(string.byte(opts.args)))
+        end,
+        { nargs = 1 }
+    )
 end
 return {
     todo = todo,
-    CreatDuck = CreatDuck
+    ch_to_ascii =ch_to_ascii,
 }
