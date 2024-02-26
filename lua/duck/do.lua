@@ -20,7 +20,8 @@ local compute=function()
             local ret=handle:read("*a")
             handle:close()
             notify(ret)
-        end
+        end,
+	{nargs=1}
     )
 end
 return {
