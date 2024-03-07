@@ -27,7 +27,7 @@ end
 local autosave=function()
     vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
         pattern = { "*" },
-        command = function()
+        function()
             vim.cmd[[silent! wall]]
             notify("already save")
         end,
