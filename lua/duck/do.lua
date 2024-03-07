@@ -25,9 +25,9 @@ local compute=function()
     )
 end
 local autosave=function()
-    vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+    api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
         pattern = { "*" },
-        function()
+        callback=function()
             vim.cmd[[silent! wall]]
             notify("already save")
         end,
@@ -35,7 +35,7 @@ local autosave=function()
     })
 end
 local lastplace=function()
-    vim.api.nvim_create_autocmd("BufReadPost", {
+    api.nvim_create_autocmd("BufReadPost", {
         pattern = "*",
         callback = function()
             if vim.fn.line("'\"") > 0 and vim.fn.line("'\"") <= vim.fn.line("$") then
