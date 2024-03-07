@@ -1,5 +1,8 @@
 local api=vim.api
 local notify=vim.notify
+local vc=vim.cmd
+local vf=vim.fn
+
 local todo=function()
     notify("Duck is running!")
 end
@@ -24,11 +27,12 @@ local compute=function()
 	{nargs=1}
     )
 end
+
 local autosave=function()
     api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
         pattern = { "*" },
         callback=function()
-            vim.cmd[[silent! wall]]
+            vc[[silent! wall]]
             notify("already save")
         end,
         nested = true,
@@ -38,9 +42,9 @@ local lastplace=function()
     api.nvim_create_autocmd("BufReadPost", {
         pattern = "*",
         callback = function()
-            if vim.fn.line("'\"") > 0 and vim.fn.line("'\"") <= vim.fn.line("$") then
-                vim.fn.setpos(".", vim.fn.getpos("'\""))
-                vim.cmd("silent! foldopen")
+            if vf.line("'\"") > 0 and vf.line("'\"") <= vf.line("$") then
+                vf.setpos(".", vf.getpos("'\""))
+                vc("silent! foldopen")
             end
         end,
     })
