@@ -9,6 +9,12 @@ local config_if=function()
     if(conf.tools.compute)then
         core.compute()
     end
+    if(conf.tools.autosave)then
+        core.autosave()
+    end
+    if(conf.tools.lastplace)then
+        core.lastplace()
+    end
 end
 local  setup=function(new_config)
     conf = vim.tbl_deep_extend("force", conf, new_config or {})

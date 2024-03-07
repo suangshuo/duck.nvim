@@ -24,8 +24,28 @@ local compute=function()
 	{nargs=1}
     )
 end
+local autosave=function()
+    vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+        pattern = { "*" },
+        command = "silent! wall",
+        nested = true,
+    })
+end
+local lastplace=function()
+    vim.api.nvim_create_autocmd("BufReadPost", {
+        pattern = "*",
+        callback = function()
+            if vim.fn.line("'\"") > 0 and vim.fn.line("'\"") <= vim.fn.line("$") then
+                vim.fn.setpos(".", vim.fn.getpos("'\""))
+                vim.cmd("silent! foldopen")
+            end
+        end,
+    })
+end
 return {
     todo = todo,
-    ch_to_ascii =ch_to_ascii,
+    ch_to_ascii = ch_to_ascii,
     compute = compute,
+    autosave = autosave,
+    lastplace = lastplace,
 }
