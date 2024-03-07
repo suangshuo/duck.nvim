@@ -2,6 +2,7 @@ local api=vim.api
 local notify=vim.notify
 local vc=vim.cmd
 local vf=vim.fn
+local augroup = api.nvim_create_augroup('highlight_cmds', {clear = true})
 
 local todo=function()
     notify("Duck is running!")
@@ -36,6 +37,7 @@ local autosave=function()
             notify("already save")
         end,
         nested = true,
+        group=augroup,
     })
 end
 local lastplace=function()
@@ -47,6 +49,7 @@ local lastplace=function()
                 vc("silent! foldopen")
             end
         end,
+        group=augroup,
     })
 end
 return {
